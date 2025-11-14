@@ -1,0 +1,11 @@
+minikube image load depi-devops-project-2-backend
+minikube image load depi-devops-project-2-frontend
+minikube image load postgres:13.4-alpine
+
+
+kubectl apply -f postgres-deployment.yaml
+kubectl apply -f backend-deployment.yaml
+kubectl apply -f frontend-deployment.yaml
+
+
+minikube service frontend
