@@ -45,6 +45,8 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<DataContext>();
         context.Database.Migrate();
         SeedData.Initialize(context);
+        var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+        db.Database.Migrate();
     }
     catch (Exception ex)
     {
