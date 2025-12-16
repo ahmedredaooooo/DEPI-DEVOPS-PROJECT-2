@@ -48,36 +48,27 @@ pipeline {
       }
     }
 
-    stage('Deploy to EKS') {
+stage('Deploy to EKS') {
     steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                          accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', 
-                          credentialsId: 'aws-access-key']]) {
-            script {
-                // Use workspace-local kubeconfig
-                env.KUBECONFIG = "${env.WORKSPACE}/kubeconfig"
-                
-                // Ensure directory exists
-                sh 'mkdir -p $(dirname $KUBECONFIG)'
+        script {
+            // Workspace-local kubeconfig
+            env.KUBECONFIG = "${env.WORKSPACE}/kubeconfig"
+            sh 'mkdir -p $(dirname $KUBECONFIG)'
 
-                // Update kubeconfig with AWS EKS
-                sh """
-                aws eks update-kubeconfig --region us-east-1 --name dev-eks --kubeconfig $KUBECONFIG
-                """
+            // Export AWS credentials
+            sh """
+            export AWS_ACCESS_KEY_ID=your_access_key
+            export AWS_SECRET_ACCESS_KEY=your_secret_key
+            export AWS_DEFAULT_REGION=us-east-1
 
-                // Test connection (optional)
-                sh 'kubectl get nodes --kubeconfig $KUBECONFIG'
-
-                // Rollout restart deployments
-                sh """
-                kubectl rollout restart deployment backend-deployment --kubeconfig $KUBECONFIG
-                kubectl rollout restart deployment frontend-deployment --kubeconfig $KUBECONFIG
-                """
-            }
+            aws eks update-kubeconfig --region us-east-1 --name dev-eks --kubeconfig $KUBECONFIG
+            kubectl rollout restart deployment backend-deployment --kubeconfig $KUBECONFIG
+            kubectl rollout restart deployment frontend-deployment --kubeconfig $KUBECONFIG
+            """
         }
     }
 }
+
 
   
 }
