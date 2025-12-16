@@ -55,7 +55,7 @@ pipeline {
             string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
         ]) {
             sh '''
-            aws eks update-kubeconfig --region $AWS_REGION --name dev-eks-cluster
+            aws eks update-kubeconfig --region $AWS_REGION --name dev-eks
             kubectl rollout restart deployment backend-deployment
             kubectl rollout restart deployment frontend-deployment
             '''
