@@ -55,10 +55,13 @@ pipeline {
             string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
         ]) {
             sh '''
-            aws eks update-kubeconfig --region $AWS_REGION --name dev-eks
-            kubectl rollout restart deployment backend-deployment
-            kubectl rollout restart deployment frontend-deployment
-            '''
+        export AWS_DEFAULT_REGION=us-east-1
+        aws eks update-kubeconfig --region $AWS_DEFAULT_REGION --name dev-eks
+        export KUBECONFIG=/var/lib/jenkins/.kube/config
+        kubectl get nodes
+        kubectl rollout restart deployment backend-deployment
+        kubectl rollout restart deployment frontend-deployment
+      '''
         }
     }
 }
