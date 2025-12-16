@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:8000/api/products';
+  //private apiUrl ="http://ac742457c62f74e0bb4605395d11bbab-1995426821.us-east-1.elb.amazonaws.com/api/products" ;
+  private apiUrl ="http://localhost:5077/api/products" ;
 
   constructor(private http: HttpClient) { }
 
