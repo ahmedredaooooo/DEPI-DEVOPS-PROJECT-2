@@ -17,13 +17,18 @@ pipeline {
     }
 
     stage('Login to ECR Public') {
-      steps {
-        sh '''
-        aws ecr-public get-login-password --region us-east-1 \
-        | docker login --username AWS --password-stdin public.ecr.aws
-        '''
-      }
+    steps {
+        withCredentials([
+            string(credentialsId: 'aws-access-key', variable: 'AWS_ACCESS_KEY_ID'),
+            string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
+        ]) {
+            sh '''
+            aws ecr-public get-login-password --region $AWS_REGION \
+            | docker login --username AWS --password-stdin $ECR_PUBLIC
+            '''
+        }
     }
+}
 
     stage('Build Backend') {
       steps {
@@ -44,13 +49,19 @@ pipeline {
     }
 
     stage('Deploy to EKS') {
-      steps {
-        sh '''
-        aws eks update-kubeconfig --region us-east-1 --name dev-eks-cluster
-        kubectl rollout restart deployment backend-deployment
-        kubectl rollout restart deployment frontend-deployment
-        '''
-      }
+    steps {
+        withCredentials([
+            string(credentialsId: 'aws-access-key', variable: 'AWS_ACCESS_KEY_ID'),
+            string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
+        ]) {
+            sh '''
+            aws eks update-kubeconfig --region $AWS_REGION --name dev-eks-cluster
+            kubectl rollout restart deployment backend-deployment
+            kubectl rollout restart deployment frontend-deployment
+            '''
+        }
     }
-  }
+}
+  
+}
 }
