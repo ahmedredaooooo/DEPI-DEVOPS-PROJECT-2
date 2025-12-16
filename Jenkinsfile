@@ -4,8 +4,8 @@ pipeline {
   environment {
     AWS_REGION = "us-east-1"
     ECR_PUBLIC = "public.ecr.aws/t5z8k5y0"
-    BACKEND_IMG = "backend"
-    FRONTEND_IMG = "frontend"
+    BACKEND_IMG = "backend-api"
+    FRONTEND_IMG = "frontend-app"
   }
 
   stages {
