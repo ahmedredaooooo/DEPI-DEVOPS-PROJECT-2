@@ -6,6 +6,8 @@ pipeline {
     ECR_PUBLIC = "public.ecr.aws/t5z8k5y0"
     BACKEND_IMG = "backend-api"
     FRONTEND_IMG = "frontend-app"
+    AWS_ACCESS_KEY_ID     = credentials('aws-access-key')
+    AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
   }
 
   stages {
