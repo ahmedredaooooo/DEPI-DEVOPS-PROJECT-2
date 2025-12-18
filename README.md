@@ -59,6 +59,13 @@ terraform init
 terraform apply 
 
 Build images then push images into ECR
+
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+
+aws ecr-public create-repository  --repository-name backend-api --region us-east-1
+
+aws ecr-public create-repository  --repository-name frontend-app --region us-east-1
+
 docker tag backend:latest public.ecr.aws/t5z8k5y0/backend-api:latest
 
 docker push public.ecr.aws/t5z8k5y0/backend-api:latest
