@@ -20,11 +20,48 @@ NgNET is a boilerplate application featuring Docker, Angular 15 frontend with ho
 ![NgNET](https://i.imgur.com/xNiYRRx.png)
 ## Getting Started
 
-Follow these steps to run the application:
-   ```bash
-   git clone https://github.com/codebangla/ngnet.git
-   cd ngnet
-   docker-compose up
-   ```
-- Open your browser and go to http://localhost:4201 to access the application.
-- Swagger backend http://localhost:8000/swagger
+## Project Architecture
+![WhatsApp Image 2025-12-18 at 6 12 24 PM](https://github.com/user-attachments/assets/f0ddf898-793a-4221-b705-8d011da98331)
+
+## To run from your pc build frontend and backend using docker then apply your deployments 
+<img width="1497" height="692" alt="image-frontend" src="https://github.com/user-attachments/assets/bd298422-7bd4-40ac-9650-2f09a5e239ac" />
+<img width="1463" height="651" alt="image-backend" src="https://github.com/user-attachments/assets/154a26a0-357d-476d-a23b-a4ec394c3e9a" />
+
+## using these commands 
+minikube image load backend
+minikube image load frontend
+
+kubectl apply -f postgres-deployment.yaml
+kubectl apply -f backend-deployment.yaml
+kubectl apply -f frontend-deployment.yaml
+
+minikube service frontend
+
+## To run from AWS follow these steps 
+create i am user and give it permissions 
+create access key 
+
+download aws cli 
+run aws configure (enter the access key and region)
+
+create bucket to create terraform locks inside it 
+
+aws s3 mb s3://dev-ops-terraform-state --region us-east-1
+aws dynamodb create-table --table-name terraform-locks --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --region us-east-1
+
+## inside terraform folder run these commands 
+terraform init
+terraform apply 
+
+Build images then push images into ECR
+docker tag backend:latest public.ecr.aws/t5z8k5y0/backend-api:latest
+docker push public.ecr.aws/t5z8k5y0/backend-api:latest
+
+docker tag frontend:latest public.ecr.aws/t5z8k5y0/frontend-app:latest
+docker push public.ecr.aws/t5z8k5y0/frontend-app:latest
+
+<img width="1085" height="307" alt="frontend-push" src="https://github.com/user-attachments/assets/7e5ac883-7b42-4d4a-963f-dbd74ff4f117" />
+<img width="1335" height="280" alt="backend_push" src="https://github.com/user-attachments/assets/a3cb7aef-298b-47e6-81bd-021131fa635e" />
+
+## Output will be like that
+<img width="1747" height="960" alt="output" src="https://github.com/user-attachments/assets/a1faedef-babf-4511-8fa5-f10fd52cf55e" />
