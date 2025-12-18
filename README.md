@@ -29,16 +29,20 @@ NgNET is a boilerplate application featuring Docker, Angular 15 frontend with ho
 
 ## using these commands 
 minikube image load backend
+
 minikube image load frontend
 
 kubectl apply -f postgres-deployment.yaml
+
 kubectl apply -f backend-deployment.yaml
+
 kubectl apply -f frontend-deployment.yaml
 
 minikube service frontend
 
 ## To run from AWS follow these steps 
 create i am user and give it permissions 
+
 create access key 
 
 download aws cli 
@@ -51,17 +55,26 @@ aws dynamodb create-table --table-name terraform-locks --attribute-definitions A
 
 ## inside terraform folder run these commands 
 terraform init
+
 terraform apply 
 
 Build images then push images into ECR
 docker tag backend:latest public.ecr.aws/t5z8k5y0/backend-api:latest
+
 docker push public.ecr.aws/t5z8k5y0/backend-api:latest
 
 docker tag frontend:latest public.ecr.aws/t5z8k5y0/frontend-app:latest
+
 docker push public.ecr.aws/t5z8k5y0/frontend-app:latest
+
+<img width="1887" height="881" alt="Screenshot 2025-12-18 21014466" src="https://github.com/user-attachments/assets/863bb273-680d-433c-b464-c57a4ed43af9" />
+
+## Use Jenkins to automate the process
+<img width="1865" height="952" alt="Screenshot 2025-12-18 204749" src="https://github.com/user-attachments/assets/9c3f814a-290e-446f-b107-682126a546fb" />
 
 <img width="1085" height="307" alt="frontend-push" src="https://github.com/user-attachments/assets/7e5ac883-7b42-4d4a-963f-dbd74ff4f117" />
 <img width="1335" height="280" alt="backend_push" src="https://github.com/user-attachments/assets/a3cb7aef-298b-47e6-81bd-021131fa635e" />
+<img width="1752" height="956" alt="jen" src="https://github.com/user-attachments/assets/8a9b0138-5e28-47a5-80f1-d3a52cc8ba89" />
 
 ## Output will be like that
 <img width="1747" height="960" alt="output" src="https://github.com/user-attachments/assets/a1faedef-babf-4511-8fa5-f10fd52cf55e" />
