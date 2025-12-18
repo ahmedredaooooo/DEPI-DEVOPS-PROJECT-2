@@ -68,12 +68,12 @@ docker tag frontend:latest public.ecr.aws/t5z8k5y0/frontend-app:latest
 docker push public.ecr.aws/t5z8k5y0/frontend-app:latest
 
 <img width="1887" height="881" alt="Screenshot 2025-12-18 21014466" src="https://github.com/user-attachments/assets/863bb273-680d-433c-b464-c57a4ed43af9" />
+<img width="1085" height="307" alt="frontend-push" src="https://github.com/user-attachments/assets/7e5ac883-7b42-4d4a-963f-dbd74ff4f117" />
+<img width="1335" height="280" alt="backend_push" src="https://github.com/user-attachments/assets/a3cb7aef-298b-47e6-81bd-021131fa635e" />
 
 ## Use Jenkins to automate the process
 <img width="1865" height="952" alt="Screenshot 2025-12-18 204749" src="https://github.com/user-attachments/assets/9c3f814a-290e-446f-b107-682126a546fb" />
 
-<img width="1085" height="307" alt="frontend-push" src="https://github.com/user-attachments/assets/7e5ac883-7b42-4d4a-963f-dbd74ff4f117" />
-<img width="1335" height="280" alt="backend_push" src="https://github.com/user-attachments/assets/a3cb7aef-298b-47e6-81bd-021131fa635e" />
 <img width="1752" height="956" alt="jen" src="https://github.com/user-attachments/assets/8a9b0138-5e28-47a5-80f1-d3a52cc8ba89" />
 
 ## Output will be like that
