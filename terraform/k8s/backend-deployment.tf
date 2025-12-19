@@ -1,3 +1,13 @@
+resource "kubernetes_secret" "db_secret" {
+  metadata {
+    name = "db-secret"
+  }
+
+  data = {
+    DB_PASSWORD = base64encode(var.db_password)
+  }
+}
+
 resource "kubernetes_deployment" "backend" {
   metadata {
     name = "backend-deployment"
@@ -49,7 +59,12 @@ resource "kubernetes_deployment" "backend" {
           }
           env {
             name  = "DB_PASSWORD"
-            value = "StrongPassword123!"
+            value_from {
+              secret_key_ref {
+                name = kubernetes_secret.db_secret.metadata[0].name
+                key  = "DB_PASSWORD"
+              }
+            }
           }
         }
       }
